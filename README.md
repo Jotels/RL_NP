@@ -1,5 +1,5 @@
 # Reinforcement Learning for Nanoparticle Structure Learning
-This is a modified and adapted version of the original repo from:
+This is a modified and adapted version of the original Molgym framework from:
 
 **Reinforcement Learning for Molecular Design Guided by Quantum Mechanics**<br>
 Gregor N. C. Simm, Robert Pinsler and José Miguel Hernández-Lobato <br>
