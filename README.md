@@ -26,7 +26,24 @@ Dependencies:
    pip install -r molgym/requirements.txt
    pip install -e molgym/
    ```
+## Reward Function
+To change from the final to the stepwise reward function, unhash the 4 lines below in reward.py:
+```text
+       # e_tot = self._calculate_energy(all_atoms)
+       # e_parts = self._calculate_energy(atoms) + self._calculate_atomic_energy(new_atom)
+       # delta_e = e_tot - e_parts
+       # reward = -1 * delta_e/27.21
 
+```
+And hash the following lines directly below:
+```text
+        if len(all_atoms.numbers) < num_atoms:
+                reward= 0                
+        else:
+                e_tot = self._convert_ev_to_hartree(self._calculate_energy(all_atoms))
+                reward = num_atoms/e_tot  # - baseline_weight * baseline_reward  
+        elapsed = time.time() - start
+```
 ## Usage
 
 Using the framework, a reinforcement learning agents can design a molecule given a specific bag of atoms. 
