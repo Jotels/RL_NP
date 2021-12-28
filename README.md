@@ -38,4 +38,5 @@ Using the framework, a reinforcement learning agents can design a molecule given
     ```
     
     This will automatically generate an experimental directory according to $PATH_TO_DESTINATION_FOLDER$ and $NAME_OF_EXPERIMENT$, and place the results in the     directory. 
+    The parameter --model should be replaced with either "painn" (PaiNN) or "internal" (SchNet).
     Default parameters are specified in the arg_parser in the run.py script, and also mentioned briefly in Table 1 in the appendix to the report.
