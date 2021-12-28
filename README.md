@@ -33,7 +33,6 @@ To change from the final to the stepwise reward function, unhash the 4 lines bel
        # e_parts = self._calculate_energy(atoms) + self._calculate_atomic_energy(new_atom)
        # delta_e = e_tot - e_parts
        # reward = -1 * delta_e/27.21
-
 ```
 And hash the following lines directly below:
 ```text
