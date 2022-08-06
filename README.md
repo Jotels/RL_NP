@@ -6,9 +6,7 @@ Gregor N. C. Simm, Robert Pinsler and José Miguel Hernández-Lobato <br>
 *Proceedings of the 37th International Conference on Machine Learning*, Vienna, Austria, PMLR 119, 2020.<br>
 https://arxiv.org/abs/2002.07717
 
-However, our framework is different in several ways.
-
-The changes listed below are designed to tackle the additional challenges that are present for nanoparticles compared to molecules.
+However, our framework has been adapted to tackle the additional challenges that are present for nanoparticles compared to molecules, most importantly:
 
 1. Switch to a positive final reward instead of the original negative step-wise reward, which is not suitable for the design of nanoparticles, since intermediate low-energy structures are unlikely to be easily incorporated into a final optimal structure. 
 
