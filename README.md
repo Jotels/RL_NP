@@ -1,4 +1,4 @@
-# Reinforcement Learning for Discovering Nanoparticle Structure
+# On the effectiveness of reinforcement learning in nanoparticle design
 This is a modified and adapted version of the original Molgym framework from:
 
 **Reinforcement Learning for Molecular Design Guided by Quantum Mechanics**<br>
