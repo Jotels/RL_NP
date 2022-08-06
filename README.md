@@ -6,9 +6,14 @@ Gregor N. C. Simm, Robert Pinsler and José Miguel Hernández-Lobato <br>
 *Proceedings of the 37th International Conference on Machine Learning*, Vienna, Austria, PMLR 119, 2020.<br>
 https://arxiv.org/abs/2002.07717
 
-However, our framework is different in several ways - both in terms of how reward feedback is provided, the graph representation framework and the actor-critic network architecture. These are designed to tackle the additional challenges that are present for nanoparticles compared to molecules. Firstly, physics-inspired changes include the switch to a positive final reward. This differs from the original negative step-wise reward, which is not suitable for the design of nanoparticles, since intermediate low-energy structures are unlikely to be easily incorporated into a final optimal structure. 
-Furthermore, our reward function can easily be applied across nanoparticles of different size using the same hyperparameters, since it is based  on the potential energy per atom of the final nanoparticle configuration. A downside to this sparse reward scheme is that it requires value propagation throughout the decision, making it more technically challenging in terms of training and memory requirement.
-Secondly, we moved from an invariant message passing graph representation learning (SchNet) to an equivariant one (PaiNN). The lack of well defined bond lengths and bond angles (unlike molecules) meant it is important for the agent to learn atom positioning decisions that are based on a representation that includes direction of bonds and not just distances. The PaiNN framework also includes invariant features, however.
+However, our framework is different in several ways.
+
+The changes are designed to tackle the additional challenges that are present for nanoparticles compared to molecules. 
+
+Firstly, physics-inspired changes include the switch to a positive final reward. This differs from the original negative step-wise reward, which is not suitable for the design of nanoparticles, since intermediate low-energy structures are unlikely to be easily incorporated into a final optimal structure. 
+
+Secondly, we moved from an invariant message passing graph representation learning (SchNet) to an equivariant one (PaiNN). The PaiNN framework also includes invariant features, however.
+
 The third category of improvements we did were non-specific to the nanoparticle building task and inspired from best practices in on-policy RL. The implemented changes include the option for varying network widths and depths for the actor and critic, as well as Tanh activation functions.
 
 
@@ -32,23 +37,7 @@ Dependencies:
    pip install -r molgym/requirements.txt
    pip install -e molgym/
    ```
-## Reward Function
-To change from the final to the stepwise reward function, unhash the 4 lines below in reward.py:
-```text
-       # e_tot = self._calculate_energy(all_atoms)
-       # e_parts = self._calculate_energy(atoms) + self._calculate_atomic_energy(new_atom)
-       # delta_e = e_tot - e_parts
-       # reward = -1 * delta_e/27.21
-```
-And hash the following lines directly below:
-```text
-        if len(all_atoms.numbers) < num_atoms:
-                reward= 0                
-        else:
-                e_tot = self._convert_ev_to_hartree(self._calculate_energy(all_atoms))
-                reward = num_atoms/e_tot  # - baseline_weight * baseline_reward  
-        elapsed = time.time() - start
-```
+
 ## Usage
 
 Using the framework, a reinforcement learning agent can design a nanoparticle given a set of metal atoms. 
