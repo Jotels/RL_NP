@@ -8,12 +8,14 @@ https://arxiv.org/abs/2002.07717
 
 However, our framework has been adapted to tackle the additional challenges that are present for nanoparticles compared to molecules, most importantly:
 
-1. Switch to a positive final reward instead of the original negative step-wise reward, which is not suitable for the design of nanoparticles, since intermediate low-energy structures are unlikely to be easily incorporated into a final optimal structure. 
+1. Switch to a positive final reward instead of the original negative step-wise reward.
 
 2. Switch to an equivariant message passing graph representation learning (PaiNN), in place of the original invariant (SchNet).
 
 3. Changes that are non-specific to the nanoparticle building task are also included, which are inspired from best practices in on-policy RL. The implemented changes include the option for varying network widths and depths for the actor and critic, as well as Tanh activation functions. 
 This group of changes is inspired by the arXiv preprint **What Matters In On-Policy Reinforcement Learning? A Large-Scale Empirical Study** by the Google Brain team, located at https://arxiv.org/abs/2006.05990.
+
+In-depth reasoning for these changes are found in the manuscript.
 
 
 ## Installation
