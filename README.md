@@ -8,13 +8,14 @@ https://arxiv.org/abs/2002.07717
 
 However, our framework is different in several ways.
 
-The changes are designed to tackle the additional challenges that are present for nanoparticles compared to molecules. 
+The changes listed below are designed to tackle the additional challenges that are present for nanoparticles compared to molecules.
 
-Firstly, physics-inspired changes include the switch to a positive final reward. This differs from the original negative step-wise reward, which is not suitable for the design of nanoparticles, since intermediate low-energy structures are unlikely to be easily incorporated into a final optimal structure. 
+1. Switch to a positive final reward instead of the original negative step-wise reward, which is not suitable for the design of nanoparticles, since intermediate low-energy structures are unlikely to be easily incorporated into a final optimal structure. 
 
-Secondly, we moved from an invariant message passing graph representation learning (SchNet) to an equivariant one (PaiNN). The PaiNN framework also includes invariant features, however.
+2. Switch to an equivariant message passing graph representation learning (PaiNN), in place of the original invariant (SchNet).
 
-The third category of improvements we did were non-specific to the nanoparticle building task and inspired from best practices in on-policy RL. The implemented changes include the option for varying network widths and depths for the actor and critic, as well as Tanh activation functions. 
+3. Changes that are non-specific to the nanoparticle building task are also included, which are inspired from best practices in on-policy RL. The implemented changes include the option for varying network widths and depths for the actor and critic, as well as Tanh activation functions. 
+This group of changes is inspired by the arXiv preprint **What Matters In On-Policy Reinforcement Learning? A Large-Scale Empirical Study** by the Google Brain team, located at https://arxiv.org/abs/2006.05990.
 
 
 ## Installation
