@@ -50,5 +50,7 @@ Using the framework, a reinforcement learning agent can design a nanoparticle gi
     ```
     
     This will automatically generate an experimental directory according to PATH_TO_DESTINATION_FOLDER and NAME_OF_EXPERIMENT, and place the results in the     directory. 
-    The parameter --model should be replaced with either "painn" (PaiNN) or "internal" (SchNet).
-    Parameters for the experiments are specified in the appendix to the manuscript.
+    
+    The parameter --model can be replaced with either "painn" (PaiNN) or "internal" (SchNet).
+    
+    Parameters for all experiments are specified in the appendix to the manuscript.
