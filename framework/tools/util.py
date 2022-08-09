@@ -12,8 +12,8 @@ import torch
 from ase.formula import Formula
 import ase.io
 
-from molgym.agents.base import AbstractActorCritic
-from molgym.tools import mpi
+from framework.agents.base import AbstractActorCritic
+from framework.tools import mpi
 
 
 def remove_from_formula(formula: Formula, symbol: str) -> Formula:
