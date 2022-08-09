@@ -7,17 +7,15 @@ from setuptools import setup, find_packages
 
 
 version_dict = {}  # type: Dict[str, str]
-with open(convert_path('molgym/version.py')) as file:
+with open(convert_path('framework/version.py')) as file:
     exec(file.read(), version_dict)
 
 setup(
-    name='molgym',
+    name='framework',
     version=version_dict['__version__'],
     description='',
     long_description='',
     classifiers=['Programming Language :: Python :: 3.6'],
-    author='Gregor Simm and Robert Pinsler',
-    author_email='gncs2@cam.ac.uk, rp586@cam.ac.uk',
     python_requires='>=3.6',
     packages=find_packages(),
     include_package_data=True,
