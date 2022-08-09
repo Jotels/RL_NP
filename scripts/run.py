@@ -3,19 +3,19 @@ import logging
 
 import torch
 
-from molgym.agents.base import AbstractActorCritic
-from molgym.agents.internal import InternalAC
-from molgym.environment import MolecularEnvironment
-from molgym.ppo import ppo
-from molgym.reward import InteractionReward
-from molgym.spaces import ActionSpace, ObservationSpace
-from molgym.tools import mpi, util
-from molgym.tools.util import RolloutSaver, InfoSaver, parse_formulas
-from molgym.agents.painn.agent import PainnAC
+from framework.agents.base import AbstractActorCritic
+from framework.agents.internal import InternalAC
+from framework.environment import MolecularEnvironment
+from framework.ppo import ppo
+from framework.reward import InteractionReward
+from framework.spaces import ActionSpace, ObservationSpace
+from framework.tools import mpi, util
+from framework.tools.util import RolloutSaver, InfoSaver, parse_formulas
+from framework.agents.equivariant.agent import EQAC
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Run Agent in MolGym')
+    parser = argparse.ArgumentParser(description='Run Agent')
 
     # Name and seed
     parser.add_argument('--name', help='experiment name', required=True)
@@ -101,10 +101,10 @@ def parse_args() -> argparse.Namespace:
 
 
 
-    # Painn stuff
+    ## Equivariant GNN parameters
     parser.add_argument('--model', help='chosen model', type=str, default='internal')
-    parser.add_argument('--num_interactions', help='number of interaction layers in painn', type=int, default=3)
-    parser.add_argument('--cutoff', help='cutoff distance for graph connectivity in painn', type=float, default=20.)
+    parser.add_argument('--num_interactions', help='number of interaction layers in equivariant GNN', type=int, default=3)
+    parser.add_argument('--cutoff', help='cutoff distance for graph connectivity in equivariant GNN', type=float, default=20.)
 
     return parser.parse_args()
 
@@ -128,8 +128,8 @@ def build_model(config: dict, observation_space: ObservationSpace, action_space:
             actor_depth=config['actor_depth'],
             device=torch.device('cpu'),
     )
-   elif config['model'] == 'painn':
-        return PainnAC(
+   elif config['model'] == 'equivariant':
+        return EQAC(
             observation_space=observation_space,
             action_space=action_space,
             min_max_distance=(config['min_mean_distance'], config['max_mean_distance']),
