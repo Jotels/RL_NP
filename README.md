@@ -27,16 +27,16 @@ Dependencies:
 
 # To set up the framework correctly:
 
-1. Create new Python 3.6 environment:
+1. Build Python 3.6 environment:
    ```text
    virtualenv --python=python3.6 venv1
-   source molgym-venv/bin/activate
+   source venv1/bin/activate
    ```
 
-2. Install required packages and library itself:
+2. Install required packages and framework itself:
    ```text
-   pip install -r molgym/requirements.txt
-   pip install -e molgym/
+   pip install -r framework/requirements.txt
+   pip install -e framework/
    ```
 
 ## Usage
