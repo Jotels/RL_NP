@@ -3,9 +3,9 @@ from typing import Optional, List
 
 import numpy as np
 
-from molgym.spaces import ObservationType
-from molgym.tools import util
-from molgym.tools.mpi import mpi_mean_std
+from framework.spaces import ObservationType
+from framework.tools import util
+from framework.tools.mpi import mpi_mean_std
 
 
 class PPOBuffer:
