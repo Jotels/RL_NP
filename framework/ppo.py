@@ -9,12 +9,12 @@ import numpy as np
 import torch
 from torch.optim import Adam
 
-from molgym.agents.base import AbstractActorCritic
-from molgym.buffer import PPOBuffer
+from framework.agents.base import AbstractActorCritic
+from framework.buffer import PPOBuffer
 from ase.io import write
-from molgym.environment import AbstractMolecularEnvironment
-from molgym.tools.mpi import mpi_avg, mpi_avg_grads, get_num_procs, mpi_sum, mpi_mean_std
-from molgym.tools.util import RolloutSaver, to_numpy, ModelIO, InfoSaver
+from framework.environment import AbstractMolecularEnvironment
+from framework.tools.mpi import mpi_avg, mpi_avg_grads, get_num_procs, mpi_sum, mpi_mean_std
+from framework.tools.util import RolloutSaver, to_numpy, ModelIO, InfoSaver
 
 
 def compute_loss(ac: AbstractActorCritic, data: dict, clip_ratio: float, vf_coef: float,
