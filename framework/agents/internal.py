@@ -6,11 +6,11 @@ import schnetpack as spk
 import torch
 import torch.distributions
 
-from molgym.agents.base import AbstractActorCritic
-from molgym.modules import MLP, masked_softmax, to_one_hot
-from molgym.spaces import ObservationSpace, ObservationType, ActionType, ActionSpace
-from molgym.tools import zmat # Imports functions for calculating distance, positions, angles and dihedral angles
-from molgym.tools.util import to_numpy # Imports a function that converts a torch tensor to a numpy.ndarray
+from framework.agents.base import AbstractActorCritic
+from framework.modules import MLP, masked_softmax, to_one_hot
+from framework.spaces import ObservationSpace, ObservationType, ActionType, ActionSpace
+from framework.tools import zmat # Imports functions for calculating distance, positions, angles and dihedral angles
+from framework.tools.util import to_numpy # Imports a function that converts a torch tensor to a numpy.ndarray
 
 
 class InternalAC(AbstractActorCritic):
