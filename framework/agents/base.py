@@ -4,7 +4,7 @@ from typing import List, Optional
 import numpy as np
 import torch.distributions
 
-from molgym.spaces import ObservationType, ActionType, ObservationSpace, ActionSpace
+from framework.spaces import ObservationType, ActionType, ObservationSpace, ActionSpace
 
 
 class AbstractActorCritic(torch.nn.Module, abc.ABC):
