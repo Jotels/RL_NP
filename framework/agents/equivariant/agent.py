@@ -8,16 +8,16 @@ import torch
 import torch.distributions
 from torch import nn
 
-from molgym.agents.base import AbstractActorCritic
-from molgym.agents.internal import zmat
-from molgym.modules import MLP, masked_softmax, to_one_hot
-from molgym.spaces import ObservationSpace, ObservationType, ActionType, ActionSpace
-from molgym.tools.util import to_numpy
+from framework.agents.base import AbstractActorCritic
+from framework.agents.internal import zmat
+from framework.modules import MLP, masked_softmax, to_one_hot
+from framework.spaces import ObservationSpace, ObservationType, ActionType, ActionSpace
+from framework.tools.util import to_numpy
 
-from . import layer_painn as layer
-from . import data_painn
+from . import layer_eq as layer
+from . import data_eq
 
-class PainnAC(AbstractActorCritic):
+class EQAC(AbstractActorCritic):
     def __init__(
         self,
         observation_space: ObservationSpace,
@@ -40,8 +40,8 @@ class PainnAC(AbstractActorCritic):
         self.num_latent_beta = actor_network_width // 4
         self.num_latent = self.num_afeats + self.num_latent_beta
 
-        # PaiNN variables:
-        self.transformer = data_painn.TransformAtomsObjectsToGraphXyz(cutoff=cutoff)
+        # Equivariant variables:
+        self.transformer = data_eq.TransformAtomsObjectsToGraphXyz(cutoff=cutoff)
         self.hidden_state_size = actor_network_width // 2
         if device==torch.device("cuda"):
             self.pin=True
@@ -59,12 +59,12 @@ class PainnAC(AbstractActorCritic):
         # Setup interaction networks
         self.interactions = nn.ModuleList(
             [
-                layer.PaiNNInteraction(self.hidden_state_size, edge_size, self.cutoff)
+                layer.EQInteraction(self.hidden_state_size, edge_size, self.cutoff)
                 for _ in range(num_interactions)
             ]
         )
         self.scalar_vector_update = nn.ModuleList(
-            [layer.PaiNNUpdate(self.hidden_state_size) for _ in range(num_interactions)]
+            [layer.EQUpdate(self.hidden_state_size) for _ in range(num_interactions)]
         )
 
 
@@ -168,13 +168,13 @@ class PainnAC(AbstractActorCritic):
             if len(atoms) > 0:
                 # Transform to graph dictionary
                 graph_state = [self.transformer(atoms)]
-                batch_host = data_painn.collate_atomsdata(graph_state, pin_memory=self.pin)
+                batch_host = data_EQ.collate_atomsdata(graph_state, pin_memory=self.pin)
                 batch = {
                     k: v.to(device=self.device, non_blocking=True)
                     for (k, v) in batch_host.items()
                 }
-                # Get PaiNN embeddings for single observation
-                nodes_scalar, _, _ = self._get_painn_embeddings(batch)
+                # Get equivariant embeddings for single observation
+                nodes_scalar, _, _ = self._get_eq_embeddings(batch)
                 # if len(atoms)>4:
                 #     print("nodes_scalar : " + str(nodes_scalar.shape))
                 #     print(nodes_scalar)
@@ -231,18 +231,18 @@ class PainnAC(AbstractActorCritic):
             new_atom = ase.Atom(symbol=self.observation_space.bag_space.get_symbol(new_element), position=new_position)
             atoms.append(new_atom)
             graph_state = [self.transformer(atoms)]
-            batch_host = data_painn.collate_atomsdata(graph_state, pin_memory=self.pin)
+            batch_host = data_eq.collate_atomsdata(graph_state, pin_memory=self.pin)
             batch = {
                 k: v.to(device=self.device, non_blocking=True)
                 for (k, v) in batch_host.items()
             }
-            nodes_scalar, _, _ = self._get_painn_embeddings(batch)
+            nodes_scalar, _, _ = self._get_eq_embeddings(batch)
             features[i] = nodes_scalar[-1, :]
 
         return features
 
 
-    def _get_painn_embeddings(self, input_dict: dict) -> Tuple[torch.tensor, torch.tensor, torch.tensor]:
+    def _get_eq_embeddings(self, input_dict: dict) -> Tuple[torch.tensor, torch.tensor, torch.tensor]:
 
         # Unpad and concatenate edges and features into batch (0th) dimension
         edges_displacement = layer.unpad_and_cat(
