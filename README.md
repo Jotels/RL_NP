@@ -1,5 +1,5 @@
 # On the effectiveness of reinforcement learning in nanoparticle design
-This is a modified and adapted version of the original Molgym framework from:
+This is a modified and adapted version of the Molgym framework from:
 
 **Reinforcement Learning for Molecular Design Guided by Quantum Mechanics**<br>
 Gregor N. C. Simm, Robert Pinsler and José Miguel Hernández-Lobato <br>
@@ -10,7 +10,7 @@ However, our framework has been adapted to tackle the additional challenges that
 
 1. Switch to a positive final reward instead of the original negative step-wise reward.
 
-2. Switch to an equivariant message passing graph representation learning (PaiNN), in place of the original invariant (SchNet).
+2. Switch to an equivariant message passing graph representation learning, in place of the original invariant.
 
 3. Changes that are non-specific to the nanoparticle building task are also included, which are inspired from best practices in on-policy RL. The implemented changes include the option for varying network widths and depths for the actor and critic, as well as Tanh activation functions. 
 This group of changes is inspired by the arXiv preprint **What Matters In On-Policy Reinforcement Learning? A Large-Scale Empirical Study** by the Google Brain team, located at https://arxiv.org/abs/2006.05990.
