@@ -7,9 +7,9 @@ import gym
 import numpy as np
 from ase import Atoms, Atom
 
-from molgym.reward import InteractionReward
-from molgym.spaces import ActionSpace, ObservationSpace, ActionType, ObservationType, NULL_SYMBOL
-from molgym.tools import util
+from framework.reward import InteractionReward
+from framework.spaces import ActionSpace, ObservationSpace, ActionType, ObservationType, NULL_SYMBOL
+from framework.tools import util
 
 
 class AbstractMolecularEnvironment(gym.Env, abc.ABC):
