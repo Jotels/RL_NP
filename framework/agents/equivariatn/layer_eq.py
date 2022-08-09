@@ -277,7 +277,7 @@ class Interaction(nn.Module):
         return new_state
 
 
-class PaiNNInteraction(nn.Module):
+class EQInteraction(nn.Module):
     """Interaction network"""
 
     def __init__(self, node_size, edge_size, cutoff):
@@ -367,7 +367,7 @@ class PaiNNInteraction(nn.Module):
         return new_state_scalar, new_state_vector
 
 
-class PaiNNUpdate(nn.Module):
+class EQUpdate(nn.Module):
     """PaiNN style update network. Models the interaction between scalar and vectorial part"""
 
     def __init__(self, node_size):
