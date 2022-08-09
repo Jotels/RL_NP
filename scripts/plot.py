@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 from time import strftime, localtime
 
-from molgym.tools.analysis import parse_json_lines_file, parse_results_filename, collect_results_paths
+from framework.tools.analysis import parse_json_lines_file, parse_results_filename, collect_results_paths
 
 # Styling
 fig_width = 3.3
@@ -31,7 +31,7 @@ colors = [
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Analyse MolGym Output')
+    parser = argparse.ArgumentParser(description='Analyse Output')
 
     parser.add_argument('--dir', help='path to results directory (repeatable)', required=True, action='append')
     parser.add_argument('--baseline', help='baseline (repeatable)', required=False, action='append')
