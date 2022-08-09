@@ -9,12 +9,6 @@ from ase.calculators.emt import EMT
 
 current_calc=EMT()
 
-dAu = 2.4
-L = 10
-baseline_weight = 0
-
-
-
 class MolecularReward(abc.ABC):
     """
     Define the MolecularReward function as an abstract class
@@ -58,18 +52,14 @@ class InteractionReward(MolecularReward):
         all_atoms = atoms.copy()
 
         all_atoms.append(new_atom)
-        
-       # e_tot = self._calculate_energy(all_atoms)
-       # e_parts = self._calculate_energy(atoms) + self._calculate_atomic_energy(new_atom)
-       # delta_e = e_tot - e_parts
-       # reward = -1 * delta_e/27.21
+      
 
 
         if len(all_atoms.numbers) < num_atoms:
                 reward= 0                
         else:
                 e_tot = self._convert_ev_to_hartree(self._calculate_energy(all_atoms))
-                reward = num_atoms/e_tot  # - baseline_weight * baseline_reward  
+                reward = num_atoms/e_tot  
         elapsed = time.time() - start
 
 
@@ -82,8 +72,6 @@ class InteractionReward(MolecularReward):
     def _calculate_atomic_energy(self, atom: Atom) -> float:
         if atom.symbol not in self.atom_energies:
             atoms = Atoms()
-            #atoms.pbc = (False,False,False)
-            #atoms.center(vacuum=10)
             atoms.append(atom)
             self.atom_energies[atom.symbol] = self._calculate_energy(atoms)
         return self.atom_energies[atom.symbol]
