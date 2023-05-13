@@ -1,5 +1,4 @@
-# Equivariant Graph Representation Based Actor-Critic
-Reinforcement Learning for Nanoparticle Design
+# Equivariant Graph Representation Based Actor-Critic Reinforcement Learning for Nanoparticle Design
 This is a modified and adapted version of the Molgym framework from:
 
 **Reinforcement Learning for Molecular Design Guided by Quantum Mechanics**<br>
